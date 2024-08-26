@@ -1,0 +1,50 @@
+replicaCount: 1
+
+image:
+  repository: sahere/test
+  #pullPolicy: IfNotPresent
+  tag: latest
+
+service:
+  type: ClusterIP
+  targetPort: 8085
+  port: 80
+
+ingress:
+  enabled: true
+  className: "nginx"
+  host: hello.local
+
+configMap:
+  enabled: true
+  data:
+    # HOST: "0.0.0.0"
+    # PORT: "8085"
+    DB_USERNAME: "boz"
+    DB_PASSWORD: "bozi"
+    DB_HOSTNAME: "postgresql"
+    DB_PORT: "5432"
+    DB_DBNAME: "boz"
+    MIGRATION_PATH: "db/migration"
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+

@@ -1,0 +1,7 @@
+---
+- name: Deploy HAProxy with VRRP
+  hosts: haproxy_servers
+  become: yes
+  roles:
+    - haproxy
+    - keepalived

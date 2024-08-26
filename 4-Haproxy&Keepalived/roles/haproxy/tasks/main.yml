@@ -1,0 +1,21 @@
+---
+- name: Install HAProxy
+  apt:
+    name: haproxy
+    state: present
+
+- name: Create HAProxy configuration
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+  notify: Restart HAProxy
+
+- name: Enable and start HAProxy
+  systemd:
+    name: haproxy
+    enabled: yes
+    state: started
+
+- name: Add HAProxy handler
+  ansible.builtin.meta: flush_handlers
+

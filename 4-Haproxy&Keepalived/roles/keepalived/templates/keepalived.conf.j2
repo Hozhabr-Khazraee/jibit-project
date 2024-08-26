@@ -1,0 +1,16 @@
+{% for vip in virtual_ips %}
+vrrp_instance VI_{{ loop.index }} {
+    state MASTER
+    interface {{ primary_interface.stdout }}
+    virtual_router_id {{ loop.index }}
+    priority {{ vip.priority[inventory_hostname] }}
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+    }
+    virtual_ipaddress {
+        {{ vip.vip }}
+    }
+}
+{% endfor %}
