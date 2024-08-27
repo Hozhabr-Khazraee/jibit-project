@@ -18,9 +18,7 @@ defaults
     timeout server  50000
 
 frontend http_front
-    {% for vip in virtual_ips %}
-    bind {{ vip.vip }}:{{ haproxy_frontend_port }}
-    {% endfor %}
+    bind :{{ haproxy_frontend_port }}
     default_backend http_back
 
 backend http_back
