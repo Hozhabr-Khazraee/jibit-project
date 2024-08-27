@@ -21,4 +21,4 @@
         endpoint: {https://docker-proxy.hasti.co}
     longhorn_enable: true
   roles:
-     - role: ansible-role-rke2
+     - role: rke2
